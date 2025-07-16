@@ -1,7 +1,7 @@
 # Поиск пути между прямоугольниками на Canvas
 
-Этот проект реализует алгоритм маршрутизации между прямоугольниками на <canvas> с использованием A\* и библиотеки [`rbush`](https://github.com/mourner/rbush) для ускорения оптимизации пространственных вычислений.
-[GitHub](https://github.com/ArchibaldKronin/pathfinding-a-star)
+Этот проект реализует алгоритм маршрутизации между прямоугольниками на canvas с использованием A\* и библиотеки [`rbush`](https://github.com/mourner/rbush) для ускорения оптимизации пространственных вычислений.<br>
+[GitHub](https://github.com/ArchibaldKronin/pathfinding-a-star)<br>
 [Демо](https://pathfinding-a-star.netlify.app/)
 
 ---
