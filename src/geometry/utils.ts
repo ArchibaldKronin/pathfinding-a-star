@@ -44,7 +44,6 @@ export function getPointId(p: Point): string {
 export function getDirectionByAngle(angle: number): Direction {
   switch (angle % 360) {
     case 0:
-    case 360:
       return "right";
     case 90:
       return "bottom";
@@ -60,7 +59,6 @@ export function getDirectionByAngle(angle: number): Direction {
 export function getAxleForMovementByAngle(angle: number): "X" | "Y" {
   switch (angle % 360) {
     case 0:
-    case 360:
     case 180:
       return "Y";
     case 90:
