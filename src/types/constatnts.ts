@@ -8,7 +8,7 @@ export const DIRECTIONS = [
   { axis: "y", dir: "bottom" },
 ] as const;
 
-export const TURN_PENALTY = 79;
+export const TURN_PENALTY = 205;
 
 export const PREPARED_CONFIGS: PreparedConfigsType = {
   1: {
