@@ -75,7 +75,14 @@ export const dataConverter: DataConverterType = (
 
   const outerRectForSegments = inflateRect(outerRectForNodes, 5);
 
-  const rTree = buildRectTree([rect1, rect2, outerRectForSegments]);
+  const inflatedRectForRTree1 = inflateRect(rect1, 9);
+  const inflatedRectForRTree2 = inflateRect(rect2, 9);
+
+  const rTree = buildRectTree([
+    inflatedRectForRTree1,
+    inflatedRectForRTree2,
+    outerRectForSegments,
+  ]);
   const entryDirection = getDirectionByAngle(cPoint1.angle);
 
   const { path } = aStarSearch(
