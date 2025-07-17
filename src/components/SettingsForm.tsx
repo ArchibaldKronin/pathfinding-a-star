@@ -147,7 +147,8 @@ export const RectSettingsFields: FC<RectSettingsFieldsProps> = ({
     const axis = currentAxleConPointState;
     const [min, max] = conPointMovementDiapason;
 
-    const newCoord = Math.round(min + (max - min) * sliderPosition);
+    const newCoord = min + (max - min) * sliderPosition;
+    // const newCoord = Math.round(min + (max - min) * sliderPosition);
 
     if (axis === "X") {
       newState.conPoint.point.x = newCoord;

@@ -96,8 +96,13 @@ export const dataConverter: DataConverterType = (
   if (!path) throw new Error("Путь не найден");
 
   return simplifyPath([
-    roundPoint({ x: cPoint1.point.x, y: cPoint1.point.y }),
+    { x: cPoint1.point.x, y: cPoint1.point.y },
     ...path.map((p) => ({ x: p.x, y: p.y })),
-    roundPoint({ x: cPoint2.point.x, y: cPoint2.point.y }),
+    { x: cPoint2.point.x, y: cPoint2.point.y },
   ]);
+  // return simplifyPath([
+  //   roundPoint({ x: cPoint1.point.x, y: cPoint1.point.y }),
+  //   ...path.map((p) => ({ x: p.x, y: p.y })),
+  //   roundPoint({ x: cPoint2.point.x, y: cPoint2.point.y }),
+  // ]);
 };

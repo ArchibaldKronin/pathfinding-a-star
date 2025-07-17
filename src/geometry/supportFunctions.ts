@@ -78,14 +78,22 @@ export function getOuterRect(inflated1AABB: AABB, inflated2AABB: AABB): Rect {
   const outerMinY = Math.min(inflated1AABB.minY, inflated2AABB.minY);
   const outerMaxY = Math.max(inflated1AABB.maxY, inflated2AABB.maxY);
 
-  const center: Point = roundPoint({
+  const center: Point = {
     x: outerMinX + (outerMaxX - outerMinX) / 2,
     y: outerMinY + (outerMaxY - outerMinY) / 2,
-  });
+  };
   const size: Size = {
     width: outerMaxX - outerMinX,
     height: outerMaxY - outerMinY,
   };
+  // const center: Point = roundPoint({
+  //   x: outerMinX + (outerMaxX - outerMinX) / 2,
+  //   y: outerMinY + (outerMaxY - outerMinY) / 2,
+  // });
+  // const size: Size = {
+  //   width: outerMaxX - outerMinX,
+  //   height: outerMaxY - outerMinY,
+  // };
 
   return { position: center, size };
 }

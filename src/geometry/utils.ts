@@ -84,11 +84,17 @@ export function rectToAABB(rect: Rect): AABB {
   const halfH = size.height / 2;
 
   return {
-    minX: round(position.x - halfW),
-    maxX: round(position.x + halfW),
-    minY: round(position.y - halfH),
-    maxY: round(position.y + halfH),
+    minX: position.x - halfW,
+    maxX: position.x + halfW,
+    minY: position.y - halfH,
+    maxY: position.y + halfH,
   };
+  // return {
+  //   minX: round(position.x - halfW),
+  //   maxX: round(position.x + halfW),
+  //   minY: round(position.y - halfH),
+  //   maxY: round(position.y + halfH),
+  // };
 }
 
 export function moveByAngle( // движение от точки присоединения до отступа прямоугольника
@@ -98,9 +104,13 @@ export function moveByAngle( // движение от точки присоед�
 ): Point {
   const rad = (angle * Math.PI) / 180;
   return {
-    x: round(point.x + Math.cos(rad) * distance),
-    y: round(point.y + Math.sin(rad) * distance),
+    x: point.x + Math.cos(rad) * distance,
+    y: point.y + Math.sin(rad) * distance,
   };
+  // return {
+  //   x: round(point.x + Math.cos(rad) * distance),
+  //   y: round(point.y + Math.sin(rad) * distance),
+  // };
 }
 
 export function inflateRect(rect: Rect, margin: number): Rect {
@@ -141,8 +151,10 @@ export function getDirection(from: Point, to: Point): Direction | null {
 }
 
 export function isPointsEqual(p1: Point, p2: Point): boolean {
-  const normalizedP1 = roundPoint(p1);
-  const normalizedP2 = roundPoint(p2);
+  const normalizedP1 = p1;
+  const normalizedP2 = p2;
+  // const normalizedP1 = roundPoint(p1);
+  // const normalizedP2 = roundPoint(p2);
   return normalizedP1.x === normalizedP2.x && normalizedP1.y === normalizedP2.y;
 }
 
@@ -198,15 +210,27 @@ export function getConPointMovementDiapason(
   switch (axle) {
     case "X":
       return [
-        round(rect.position.x - rect.size.width / 2),
-        round(rect.position.x + rect.size.width / 2),
+        rect.position.x - rect.size.width / 2,
+        rect.position.x + rect.size.width / 2,
       ];
     case "Y":
       return [
-        round(rect.position.y - rect.size.height / 2),
-        round(rect.position.y + rect.size.height / 2),
+        rect.position.y - rect.size.height / 2,
+        rect.position.y + rect.size.height / 2,
       ];
   }
+  // switch (axle) {
+  //   case "X":
+  //     return [
+  //       round(rect.position.x - rect.size.width / 2),
+  //       round(rect.position.x + rect.size.width / 2),
+  //     ];
+  //   case "Y":
+  //     return [
+  //       round(rect.position.y - rect.size.height / 2),
+  //       round(rect.position.y + rect.size.height / 2),
+  //     ];
+  // }
 }
 
 export function isPointInRect(rect: Rect, point: Point): boolean {

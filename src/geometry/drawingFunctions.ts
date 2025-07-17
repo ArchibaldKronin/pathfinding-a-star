@@ -12,8 +12,10 @@ export function drawScene(
   ctx.strokeStyle = "black";
   rects.forEach((rect) => {
     ctx.strokeRect(
-      Math.round(rect.position.x - rect.size.width / 2),
-      Math.round(rect.position.y - rect.size.height / 2),
+      rect.position.x - rect.size.width / 2,
+      rect.position.y - rect.size.height / 2,
+      // Math.round(rect.position.x - rect.size.width / 2),
+      // Math.round(rect.position.y - rect.size.height / 2),
       rect.size.width,
       rect.size.height
     );
