@@ -23,7 +23,6 @@ import {
   isSegmentsEqual,
   manhattan,
   rectToAABB,
-  // roundPoint,
   segmentToAABB,
 } from "./utils";
 
@@ -86,14 +85,6 @@ export function getOuterRect(inflated1AABB: AABB, inflated2AABB: AABB): Rect {
     width: outerMaxX - outerMinX,
     height: outerMaxY - outerMinY,
   };
-  // const center: Point = roundPoint({
-  //   x: outerMinX + (outerMaxX - outerMinX) / 2,
-  //   y: outerMinY + (outerMaxY - outerMinY) / 2,
-  // });
-  // const size: Size = {
-  //   width: outerMaxX - outerMinX,
-  //   height: outerMaxY - outerMinY,
-  // };
 
   return { position: center, size };
 }

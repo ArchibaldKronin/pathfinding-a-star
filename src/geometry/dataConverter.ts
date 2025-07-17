@@ -16,7 +16,6 @@ import {
   inflateRect,
   moveByAngle,
   rectToAABB,
-  // roundPoint,
 } from "./utils";
 
 type DataConverterType = (
@@ -100,9 +99,4 @@ export const dataConverter: DataConverterType = (
     ...path.map((p) => ({ x: p.x, y: p.y })),
     { x: cPoint2.point.x, y: cPoint2.point.y },
   ]);
-  // return simplifyPath([
-  //   roundPoint({ x: cPoint1.point.x, y: cPoint1.point.y }),
-  //   ...path.map((p) => ({ x: p.x, y: p.y })),
-  //   roundPoint({ x: cPoint2.point.x, y: cPoint2.point.y }),
-  // ]);
 };
