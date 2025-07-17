@@ -135,6 +135,8 @@ function App() {
           <CanvasMap
             rects={canvasRects}
             path={pathState ?? [{ x: 0, y: 0 }]}
+            startPoint={appState.conPointA.point}
+            endPoint={appState.conPointB.point}
             onRectMove={handleRectMove}
           />
         </div>

@@ -70,6 +70,10 @@ input[type="range"] {
   justify-content: center;
 }
 
+.pathDiv {
+  min-height: 60px;
+}
+
 canvas {
   margin: 0 auto;
   border: 1px solid black;

@@ -15,11 +15,19 @@ export type CanvasMapUpdate =
 export type CanvasMapProps = {
   rects: Rect[];
   path: Point[];
+  startPoint: Point;
+  endPoint: Point;
   onRectMove: (partialState: CanvasMapUpdate) => void;
   reachablePoints?: Point[];
 };
 
-const CanvasMap: FC<CanvasMapProps> = ({ rects, path, onRectMove }) => {
+const CanvasMap: FC<CanvasMapProps> = ({
+  rects,
+  path,
+  startPoint,
+  endPoint,
+  onRectMove,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -53,12 +61,16 @@ const CanvasMap: FC<CanvasMapProps> = ({ rects, path, onRectMove }) => {
 
       const rectId = clickedRectIndex === 0 ? "A" : "B";
       const rectObj = rects[clickedRectIndex];
-      const conPointObj = rectId === "A" ? path[0] : path[path.length - 1];
+      const conPointObj = rectId === "A" ? startPoint : endPoint;
 
       setDraggingRect(rectId);
 
       setOffsetRect({ x: x - rectObj.position.x, y: y - rectObj.position.y });
-      setOffsetConPoint({ x: x - conPointObj.x, y: y - conPointObj.y });
+      try {
+        setOffsetConPoint({ x: x - conPointObj.x, y: y - conPointObj.y });
+      } catch (e) {
+        console.log(x, y, conPointObj);
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
