@@ -66,11 +66,7 @@ const CanvasMap: FC<CanvasMapProps> = ({
       setDraggingRect(rectId);
 
       setOffsetRect({ x: x - rectObj.position.x, y: y - rectObj.position.y });
-      try {
-        setOffsetConPoint({ x: x - conPointObj.x, y: y - conPointObj.y });
-      } catch (e) {
-        console.log(x, y, conPointObj);
-      }
+      setOffsetConPoint({ x: x - conPointObj.x, y: y - conPointObj.y });
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -130,6 +126,8 @@ const CanvasMap: FC<CanvasMapProps> = ({
     offsetRect,
     offsetConPoint,
     path,
+    endPoint,
+    startPoint,
     debouncedOnRectMove,
   ]);
 
