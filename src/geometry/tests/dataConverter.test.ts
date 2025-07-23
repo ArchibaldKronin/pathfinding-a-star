@@ -113,4 +113,20 @@ describe("dataConverter", () => {
       "Ошибка позиционирования точки присоединения"
     );
   });
+
+  it("Находит путь с наименьшим количеством поворотов при равной длине", () => {
+    const rect1 = createRect(100, 100, 100, 100);
+    const rect2 = createRect(225, 75, 50, 50);
+    const conPoint1: ConnectionPoint = { angle: 0, point: { x: 150, y: 120 } };
+    const conPoint2: ConnectionPoint = {
+      angle: 90,
+      point: { x: 220, y: 100 },
+    };
+    const result = dataConverter(rect1, rect2, conPoint1, conPoint2);
+    expect(result).toEqual([
+      { x: 150, y: 120 },
+      { x: 220, y: 120 },
+      { x: 220, y: 100 },
+    ]);
+  });
 });

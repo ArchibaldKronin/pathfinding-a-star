@@ -8,8 +8,6 @@ export const DIRECTIONS = [
   { axis: "y", dir: "bottom" },
 ] as const;
 
-export const TURN_PENALTY = 205;
-
 export const PREPARED_CONFIGS: PreparedConfigsType = {
   1: {
     rectA: createRect(100, 100, 100, 100),
@@ -28,5 +26,14 @@ export const PREPARED_CONFIGS: PreparedConfigsType = {
     rectB: createRect(350, 550, 100, 100),
     conPointA: { angle: 90, point: { x: 320, y: 300 } },
     conPointB: { angle: 270, point: { x: 320, y: 500 } },
+  },
+  4: {
+    rectA: createRect(20, 20, 20, 20),
+    rectB: createRect(55, 15, 10, 10),
+    conPointA: { angle: 0, point: { x: 30, y: 15 } },
+    conPointB: {
+      angle: 180,
+      point: { x: 50, y: 15 },
+    },
   },
 };

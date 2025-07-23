@@ -7,6 +7,17 @@ import type {
   ConnectionPoint,
 } from "../types/commonTypes";
 
+export function roundToThree(x: number): number {
+  return Math.round(x * 1000) / 1000;
+}
+
+export function roundPoint(p: Point): Point {
+  return {
+    x: roundToThree(p.x),
+    y: roundToThree(p.y),
+  };
+}
+
 export function createRect(
   x: number,
   y: number,

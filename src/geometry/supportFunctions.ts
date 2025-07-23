@@ -12,7 +12,7 @@ import type {
   Segment,
   Size,
 } from "../types/commonTypes";
-import { DIRECTIONS, TURN_PENALTY } from "../types/constatnts";
+import { DIRECTIONS } from "../types/constatnts";
 import {
   deduplicatePoints,
   getDirection,
@@ -23,6 +23,7 @@ import {
   isSegmentsEqual,
   manhattan,
   rectToAABB,
+  roundPoint,
   segmentToAABB,
 } from "./utils";
 
@@ -397,6 +398,10 @@ export function buildRectTree(rects: Rect[]): RBush<RTreeSegment> {
   return tree;
 }
 
+export function normalizePath(path: Point[]): Point[] {
+  return path.map((point) => roundPoint(point));
+}
+
 export function simplifyPath(path: Point[]): Point[] {
   if (path.length <= 2) return path;
 
@@ -410,7 +415,7 @@ export function simplifyPath(path: Point[]): Point[] {
     const dir1 = getDirection(prev, curr);
     const dir2 = getDirection(curr, next);
 
-    if (dir1 !== dir2) {
+    if (dir1 !== null && dir2 !== null && dir1 !== dir2) {
       result.push(curr);
     }
   }
@@ -457,6 +462,7 @@ export function aStarSearch(
     from: null,
     visited: false,
     direction: entryDirection,
+    turns: 0,
   });
   openSet.add(startKey);
 
@@ -466,7 +472,11 @@ export function aStarSearch(
 
     for (const key of openSet) {
       const m = meta.get(key)!;
-      if (!currentMeta || m.total < currentMeta.total) {
+      if (
+        !currentMeta ||
+        m.total < currentMeta.total ||
+        (m.total === currentMeta.total && m.turns < currentMeta.turns)
+      ) {
         currentKey = key;
         currentMeta = m;
       }
@@ -509,15 +519,17 @@ export function aStarSearch(
       if (!isValidSegment(segment, tree)) continue;
 
       const baseCost = manhattan(currentNode.point, neighborNode.point);
-      const turnPenalty =
-        currentMeta.direction && currentMeta.direction !== newDirection
-          ? TURN_PENALTY
-          : 0;
 
-      const newCost = currentMeta.cost + baseCost + turnPenalty;
+      const newCost = currentMeta.cost + baseCost;
+      const addTurn = currentMeta.direction !== newDirection ? 1 : 0;
+      const newTurnsCount = currentMeta.turns + addTurn;
 
       const existing = meta.get(neighborKey);
-      if (!existing || newCost < existing.cost) {
+      if (
+        !existing ||
+        newCost < existing.cost ||
+        (newCost === existing.cost && newTurnsCount < existing.turns)
+      ) {
         meta.set(neighborKey, {
           cost: newCost,
           heuristic: manhattan(neighborNode.point, endNode.point),
@@ -525,6 +537,7 @@ export function aStarSearch(
           from: currentKey,
           visited: false,
           direction: newDirection,
+          turns: newTurnsCount,
         });
         openSet.add(neighborKey);
       }

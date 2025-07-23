@@ -49,12 +49,13 @@ export interface AStarMeta {
   from: string | null;
   visited: boolean;
   direction: Direction | null;
+  turns: number;
 }
 
 export type MetaKey = `${string}_${Direction}`;
 
 export type RectIdentificatorType = "A" | "B";
 
-export type preparedConfigKeys = "1" | "2" | "3";
+export type preparedConfigKeys = "1" | "2" | "3" | "4";
 
 export type PreparedConfigsType = Record<preparedConfigKeys, AppStateType>;

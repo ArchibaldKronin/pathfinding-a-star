@@ -7,6 +7,7 @@ import {
   generateReachablePoints,
   getOuterRect,
   isValidConnection,
+  normalizePath,
   rectsIntersect,
   simplifyPath,
 } from "./supportFunctions";
@@ -94,9 +95,13 @@ export const dataConverter: DataConverterType = (
 
   if (!path) throw new Error("Путь не найден");
 
-  return simplifyPath([
+  const normalizedPath = normalizePath(path);
+
+  const fullPath = [
     { x: cPoint1.point.x, y: cPoint1.point.y },
-    ...path.map((p) => ({ x: p.x, y: p.y })),
+    ...normalizedPath.map((p) => ({ x: p.x, y: p.y })),
     { x: cPoint2.point.x, y: cPoint2.point.y },
-  ]);
+  ];
+
+  return simplifyPath(fullPath);
 };
